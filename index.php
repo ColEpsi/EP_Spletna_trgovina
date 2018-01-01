@@ -12,6 +12,36 @@ session_start();
 	<title>Mobilko | Mobilniki po ugodnih cenah!</title>
 	<link href="bootstrap/css/lumen.bootstrap.min.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
+	<style media="screen">
+
+	{
+	 -moz-box-sizing: border-box;
+	 -webkit-box-sizing: border-box;
+	 box-sizing: border-box;
+	 margin: 0;
+	 padding: 0;
+ }
+
+
+img {
+	 max-width: 100%;
+	 -moz-transition: all 0.3s;
+	 -webkit-transition: all 0.3s;
+	 transition: all 0.3s;
+ }
+img:hover {
+	 -moz-transform: scale(1.1);
+	 -webkit-transform: scale(1.1);
+	 transform: scale(1.1);
+	 cursor: pointer;
+ }
+ #name:hover {
+ 	cursor: pointer;
+ }
+ .thumbnail {
+ 	overflow: hidden;
+ }
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -79,7 +109,7 @@ session_start();
 					    <div class="thumbnail">
 					      <img src="pictures/'. $row["Ime_slike"] .'" alt="..." height="242px" width="242px">
 					      <div class="caption">
-					        <h3>'. $row["Ime"] .'</h3>
+					        <h3 id="name">'. $row["Ime"] .'</h3>
 					        <p>
 										<h3><strong>'. $row["Cena"] .'€</strong>'. $zaloga .'</h3>
 										<a href="#" class="btn btn-success '. $zaloga_btn .'" role="button"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> V košarico</a>
