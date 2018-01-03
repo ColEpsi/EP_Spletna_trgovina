@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gostitelj: 127.0.0.1
--- Čas nastanka: 01. jan 2018 ob 21.39
+-- Čas nastanka: 03. jan 2018 ob 10.13
 -- Različica strežnika: 10.1.21-MariaDB
 -- Različica PHP: 5.6.30
 
@@ -46,7 +46,7 @@ INSERT INTO `izdelek` (`ID`, `Ime`, `Cena`, `Opis`, `Proizvajalec`, `Operacijski
 (2, 'HUAWEI MATE 10 LITE DUAL SIM PRESTIGE GOLD', '319.00', 'Pametni telefon MATE 10 LITE je narejen za hitro delovanje. Vgrajen osemjedrni procesor\r\nHisilicon Kirin 659 omogoča odlično spletno izkušnjo, poganjanje bogatih 3D-iger\r\nter enostavno, bliskovito preklapljanje med aplikacijami. Opremljen je s 4 GB delovnega pomnilnika\r\nter najhitrejšo različico Androida v7.0 ter dvojno kamero spredaj in zadaj.', 'Huawei', 'Android', '5.9', 'huawei_mate_10_gold.jpg', 3),
 (3, 'LG H870 G6 32GB ASTRO BLACK', '429.00', 'Pametni mobilni telefon LG G6 je namreč opremljen s 5,7-palčnim (14,47-centimetrskim)\r\nzaslonom IPS ločljivosti 2.880 x 1.440 slikovnih točk, 4-jedrnim procesorjem Snapdragon 821\r\nin sistemskim pomnilnikom kapacitete 4 gigabajtov.', 'LG', 'Android', '5.7', 'lg_g6_astro_black.jpg', 10),
 (4, 'SAMSUNG G950F GALAXY S8 64GB ARCTIC SILVER', '569.00', 'Samsung Galaxy S8 je vrhunski mobitel, ki vam v edinstveni kombinaciji kovine in stekla zagotavlja brezčasno eleganco.\r\nPoganja ga najnovejša in najnaprednejša Samsungova jedrna tehnologija.', 'SAMSUNG', 'Android', '5.8', 'samsung_galaxy_s8_arctic_silver.jpg', 1),
-(6, 'APPLE IPHONE 7 <br>BLACK', '559.00', 'IPhone 7 ima nov procesor A10 Fusion, ki naj bi bil dvakrat učinkovitejši od tistega v predhodniku, iPhonu 6s,\r\nv njem je več kot milijarda tranzistorjev. iPhone 7 naj bi imel zavidljivo vzdržljivost baterije, \r\nuporabljali ga bomo lahko za 12 ur brskanja v omrežju LTE, v pripravljenosti pa bo ostal 240 ur. \r\niPhone 7 bo prav tako zaznal vaš prstni odtis, s pritiskom na gumb ga boste lahko odklenili in opravili nakup,\r\npravtako nudi vodoodpornost in odpornost proti vdoru prašnih delcev.', 'APPLE', 'iOS', '4.7', 'apple_iphone_7_black.jpg', 0),
+(6, 'APPLE IPHONE 7 JET BLACK', '559.00', 'IPhone 7 ima nov procesor A10 Fusion, ki naj bi bil dvakrat učinkovitejši od tistega v predhodniku, iPhonu 6s,\r\nv njem je več kot milijarda tranzistorjev. iPhone 7 naj bi imel zavidljivo vzdržljivost baterije, \r\nuporabljali ga bomo lahko za 12 ur brskanja v omrežju LTE, v pripravljenosti pa bo ostal 240 ur. \r\niPhone 7 bo prav tako zaznal vaš prstni odtis, s pritiskom na gumb ga boste lahko odklenili in opravili nakup,\r\npravtako nudi vodoodpornost in odpornost proti vdoru prašnih delcev.', 'APPLE', 'iOS', '4.7', 'apple_iphone_7_black.jpg', 0),
 (7, 'HUAWEI HONOR 8 32GB MIDNIGHT BLACK', '319.00', 'Vitek in inovativen pametni telefon se ponaša z izboljšano inteligenco, ki bo olajšala vaš vsakdan.\r\nNa 5,2-palčnem (13,2 cm) LTPS zaslonu Huawei HONOR 8 bodo vsebine prikazane kot še nikoli poprej.\r\nDvojna kamera z ločljivostjo 12 milijonov točk na hrbtni strani in 8 milijona\r\ntočk na sprednji strani ponuja uporabniku številne inteligentne funkcije ter možnosti.', 'HUAWEI', 'Android', '5.2', 'huawei_honor_8_midnight_black.jpg', 3);
 
 -- --------------------------------------------------------

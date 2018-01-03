@@ -2,28 +2,15 @@
 include('config.php');
 session_start();
 
-$error = "";
-if(isset($_POST['submit'])) {
-	 $myemail = $_POST['email'];
-	 $mypassword = $_POST['password'];
-	 $statement = $pdo->prepare("SELECT * FROM kupec WHERE Email = ? and Password = ?");
-	 $statement->bindValue(1, $myemail);
-	 $statement->bindValue(2, $mypassword);
-	 $statement->execute();
-
-	 if ($statement->rowCount() == 1) {
-		$user = $statement->fetch();
-	 	$_SESSION["user_ID"] = $user["ID"];
-		header("location: logged_in.php");
-	 }
-	 else {
-	 	$error = '<div class="alert alert-danger" role="alert">
-  							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  							<span class="sr-only">Error:</span>
-  							Vnešeni podatki niso pravilni
-						 </div>';
-	 }
+try {
+	$statement = $pdo->prepare("SELECT * FROM kupec WHERE ID = ?");
+	$statement->bindValue(1, $_SESSION["user_ID"]);
+	$statement->execute();
+	$user = $statement->fetch();
+} catch (PDOException $e) {
+	echo "Napaka pri poizvedbi: {$e->getMessage()}";
 }
+
 ?>
 <html>
 <head>
@@ -70,35 +57,16 @@ img:hover {
 			<div class="container-fluid">
 				<a class="navbar-brand" href="index.php"><span><img src="mobilko_favicon.png" alt="" style="max-width:9%;"></span>Mobilko</a>
 				<ul class="nav fixed-top navbar-nav navbar-right">
-					<li>
-						<a href="register.php"><span class="glyphicon glyphicon-user"></span> Registracija</a>
-					</li>
-					<li class="dropdown" id="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><b><span class="glyphicon glyphicon-log-in"></span> Prijava</b> <span class="caret"></span></a>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="account.html"><b><span class="glyphicon glyphicon-user"></span> <?php  echo $user["Ime"].' '.$user["Priimek"]; ?></b> <span class="caret"></span></a>
 						<ul class="dropdown-menu" id="login-dp">
 							<li>
 								<div class="row">
 									<div class="col-md-12">
-										<form accept-charset="UTF-8" action="" class="form" id="login-nav" method="post" name="login-nav">
-											<div style="color:red">
-												<?php echo $error?>
-											</div>
-											<div class="form-group">
-												<label class="sr-only" for="InputEmail">Email naslov</label> <input class="form-control" id="InputEmail" name="email" placeholder="Email naslov" required type="email">
-											</div>
-											<div class="form-group">
-												<label class="sr-only" for="InputPassword">Geslo</label> <input class="form-control" id="exampleInputPassword2" name="password" placeholder="Geslo" required type="password">
-												<div class="help-block text-right">
-													<a href="password_reset.php">Pozabljeno geslo?</a>
-												</div>
-											</div>
-											<div class="form-group">
-												<button class="btn btn-primary btn-block" id="prijava" name="submit" type="submit">Prijava</button>
-											</div>
-										</form>
-									</div>
-									<div class="bottom text-center">
-										Nov uporabnik? <a href="register.php"><b>Registracija</b></a>
+										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='#'" type="submit">Račun</button>
+										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='#'" type="submit">Naročila</button>
+										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='#'" type="submit">Naslovi</button>
+										<button class="btn btn-danger btn-block" name="submit" onclick="window.location.href='index.php'" type="submit">Odjava</button><br>
 									</div>
 								</div>
 							</li>
@@ -137,9 +105,9 @@ img:hover {
 						}
 						echo '<div class="col-sm-6 col-md-4">
 					    <div class="thumbnail" width="100%">
-					      <a href="item_description.php?id='. $row["ID"] .'"><img src="pictures/'. $row["Ime_slike"] .'" alt="..." height="242px" width="242px"></a>
+					      <a href="logged_in_item_description.php?id='. $row["ID"] .'"><img src="pictures/'. $row["Ime_slike"] .'" alt="..." height="242px" width="242px"></a>
 					      <div class="caption">
-					        <a href="item_description.php?id='. $row["ID"] .'"><h3 id="name">'. $row["Ime"] .'</h3></a>
+					        <a href="logged_in_item_description.php?id='. $row["ID"] .'"><h3 id="name">'. $row["Ime"] .'</h3></a>
 					        <p>
 										<h3><strong>'. $row["Cena"] .'€</strong>'. $zaloga .'</h3>
 										<a href="#" class="btn btn-success '. $zaloga_btn .'" role="button"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> V košarico</a>

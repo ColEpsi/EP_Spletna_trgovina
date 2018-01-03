@@ -35,10 +35,7 @@ button.link { background:none;border:none;outline: none; }
 button:hover {
     color: red;
 }
-.dropdown:hover{
-  color: red;
-  cursor: pointer;
-}
+
 #login-dp{
     min-width: 250px;
     padding: 14px 14px 0;
