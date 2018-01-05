@@ -110,7 +110,7 @@ img:hover {
 							<li>
 								<div class="row">
 									<div class="col-md-12">
-										<p style="text-align:center"><strong>Vaša košarica je prazna.</strong></p>
+										<p style="text-align:center; color: red;"><strong>Pred dodajanjem izdelkov se prijavite!</strong></p>
 									</div>
 								</div>
 							</li>
@@ -142,7 +142,41 @@ img:hover {
 					        <a href="item_description.php?id='. $row["ID"] .'"><h3 id="name">'. $row["Ime"] .'</h3></a>
 					        <p>
 										<h3><strong>'. $row["Cena"] .'€</strong>'. $zaloga .'</h3>
-										<a href="#" class="btn btn-success '. $zaloga_btn .'" role="button"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> V košarico</a>
+										<button type="button" class="btn btn-success" data-toggle="modal" data-target="#login-popup"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> V košarico</button>
+									  <div class="modal fade" id="login-popup" role="dialog">
+									    <div class="modal-dialog">
+									      <div class="modal-content">
+									        <div class="modal-header">
+									          <button type="button" class="close" data-dismiss="modal">&times;</button>
+									          <h4 class="modal-title"><strong>Pred dodajanjem izdelkov v košarico se prijavite.</strong></h4>
+									        </div>
+									        <div class="modal-body">
+														<div class="col-md-12">
+															<form accept-charset="UTF-8" action="" class="form" id="login-nav" method="post" name="login-nav">
+																<div style="color:red">
+																	<?php echo $error?>
+																</div>
+																<div class="form-group">
+																	<label class="sr-only" for="InputEmail">Email naslov</label> <input class="form-control" id="InputEmail" name="email" placeholder="Email naslov" required type="email">
+																</div>
+																<div class="form-group">
+																	<label class="sr-only" for="InputPassword">Geslo</label> <input class="form-control" id="exampleInputPassword2" name="password" placeholder="Geslo" required type="password">
+																	<div class="help-block text-right">
+																		<a href="password_reset.php">Pozabljeno geslo?</a>
+																	</div>
+																</div>
+																<div class="form-group">
+																	<button class="btn btn-primary btn-block" id="prijava" name="submit" type="submit">Prijava</button>
+																</div>
+															</form>
+														</div>
+									        </div>
+									        <div class="modal-footer">
+									        </div>
+									      </div>
+
+									    </div>
+									  </div>
 									</p>
 					      </div>
 					    </div>

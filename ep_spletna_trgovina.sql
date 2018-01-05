@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gostitelj: 127.0.0.1
--- Čas nastanka: 03. jan 2018 ob 10.13
+-- Čas nastanka: 05. jan 2018 ob 14.20
 -- Različica strežnika: 10.1.21-MariaDB
 -- Različica PHP: 5.6.30
 
@@ -19,6 +19,22 @@ SET time_zone = "+00:00";
 --
 -- Zbirka podatkov: `ep_spletna_trgovina`
 --
+CREATE DATABASE IF NOT EXISTS `ep_spletna_trgovina` DEFAULT CHARACTER SET utf8 COLLATE utf8_slovenian_ci;
+USE `ep_spletna_trgovina`;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabele `administrator`
+--
+
+CREATE TABLE `administrator` (
+  `ID` int(10) NOT NULL,
+  `Ime` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
+  `Priimek` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
+  `Email` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
+  `Geslo` varchar(45) COLLATE utf8_slovenian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
 -- --------------------------------------------------------
 
@@ -52,14 +68,34 @@ INSERT INTO `izdelek` (`ID`, `Ime`, `Cena`, `Opis`, `Proizvajalec`, `Operacijski
 -- --------------------------------------------------------
 
 --
--- Struktura tabele `košarica`
+-- Struktura tabele `izdelek_nakupa`
 --
 
-CREATE TABLE `košarica` (
+CREATE TABLE `izdelek_nakupa` (
+  `ID_nakup` int(10) NOT NULL,
+  `ID_izdelek` int(10) NOT NULL,
+  `Kolicina` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Odloži podatke za tabelo `izdelek_nakupa`
+--
+
+INSERT INTO `izdelek_nakupa` (`ID_nakup`, `ID_izdelek`, `Kolicina`) VALUES
+(20, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabele `kosarica`
+--
+
+CREATE TABLE `kosarica` (
   `ID` int(11) NOT NULL,
   `ID_kupec` int(11) NOT NULL,
   `ID_izdelek` int(11) NOT NULL,
-  `datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `Kolicina` int(10) NOT NULL DEFAULT '1',
+  `datum` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
 -- --------------------------------------------------------
@@ -73,6 +109,8 @@ CREATE TABLE `kupec` (
   `Ime` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
   `Priimek` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
   `Email` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
+  `Naslov` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
+  `Telefonska_stevilka` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
   `Password` varchar(45) COLLATE utf8_slovenian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
@@ -80,8 +118,31 @@ CREATE TABLE `kupec` (
 -- Odloži podatke za tabelo `kupec`
 --
 
-INSERT INTO `kupec` (`ID`, `Ime`, `Priimek`, `Email`, `Password`) VALUES
-(5, 'UroÅ¡', 'VaupotiÄ', 'ugi.vaupotic@gmail.com', 'uros123');
+INSERT INTO `kupec` (`ID`, `Ime`, `Priimek`, `Email`, `Naslov`, `Telefonska_stevilka`, `Password`) VALUES
+(5, 'UroÅ¡', 'VaupotiÄ', 'ugi.vaupotic@gmail.com', 'Videm pri Ptuju 8a', '041865272', 'uros123'),
+(6, 'Lara', 'Carli', 'lara.carli@gmail.com', 'RogozniÅ¡ka cesta 38, Ptuj', '111222333', 'lara'),
+(7, 'BlaÅ¾', 'Milar', 'blaz.milar@gmail.com', 'Drnovo 14', '034543043', 'bm');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabele `nakup`
+--
+
+CREATE TABLE `nakup` (
+  `ID` int(10) NOT NULL,
+  `ID_kupec` int(10) NOT NULL,
+  `Datum` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Cena` decimal(10,2) NOT NULL,
+  `Status` varchar(45) COLLATE utf8_slovenian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
+--
+-- Odloži podatke za tabelo `nakup`
+--
+
+INSERT INTO `nakup` (`ID`, `ID_kupec`, `Datum`, `Cena`, `Status`) VALUES
+(20, 5, '2018-01-05 13:44:31', '434.49', 'V obdelavi');
 
 -- --------------------------------------------------------
 
@@ -99,9 +160,29 @@ CREATE TABLE `naslov_za_posiljanje` (
   `Postna_stevilka` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Struktura tabele `prodajalec`
+--
+
+CREATE TABLE `prodajalec` (
+  `ID` int(11) NOT NULL,
+  `Ime` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
+  `Priimek` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
+  `Email` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
+  `Geslo` varchar(45) COLLATE utf8_slovenian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+
 --
 -- Indeksi zavrženih tabel
 --
+
+--
+-- Indeksi tabele `administrator`
+--
+ALTER TABLE `administrator`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indeksi tabele `izdelek`
@@ -110,9 +191,9 @@ ALTER TABLE `izdelek`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indeksi tabele `košarica`
+-- Indeksi tabele `kosarica`
 --
-ALTER TABLE `košarica`
+ALTER TABLE `kosarica`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -122,9 +203,21 @@ ALTER TABLE `kupec`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indeksi tabele `nakup`
+--
+ALTER TABLE `nakup`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indeksi tabele `naslov_za_posiljanje`
 --
 ALTER TABLE `naslov_za_posiljanje`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indeksi tabele `prodajalec`
+--
+ALTER TABLE `prodajalec`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -132,15 +225,35 @@ ALTER TABLE `naslov_za_posiljanje`
 --
 
 --
+-- AUTO_INCREMENT tabele `administrator`
+--
+ALTER TABLE `administrator`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT tabele `izdelek`
 --
 ALTER TABLE `izdelek`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
+-- AUTO_INCREMENT tabele `kosarica`
+--
+ALTER TABLE `kosarica`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+--
 -- AUTO_INCREMENT tabele `kupec`
 --
 ALTER TABLE `kupec`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT tabele `nakup`
+--
+ALTER TABLE `nakup`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT tabele `prodajalec`
+--
+ALTER TABLE `prodajalec`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

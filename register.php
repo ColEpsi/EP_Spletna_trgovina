@@ -13,6 +13,8 @@
         $myname = $_POST['name'];
         $mysurname = $_POST['surname'];
         $myemail = $_POST['email'];
+        $myaddress = $_POST['address'];
+        $myphone = $_POST['phone'];
         $mypassword = $_POST['password'];
         $mypassword_confirm = $_POST['password_confirm'];
 
@@ -36,14 +38,16 @@
           }
           else {
             try {
-              $statement = $pdo->prepare("INSERT INTO kupec (Ime, Priimek, Email, Password) VALUES
-              (?, ?, ?, ?)");
+              $statement = $pdo->prepare("INSERT INTO kupec (Ime, Priimek, Email, Naslov, Telefonska_stevilka, Password) VALUES
+              (?, ?, ?, ?, ?, ?)");
               $statement->bindValue(1, $myname);
               $statement->bindValue(2, $mysurname);
               $statement->bindValue(3, $myemail);
-              $statement->bindValue(4, $mypassword);
+              $statement->bindValue(4, $myaddress);
+              $statement->bindValue(5, $myphone);
+              $statement->bindValue(6, $mypassword);
               $statement->execute();
-              echo "Registracija je bila uspešna";
+              $message = '<div class="alert alert-success col-centered" style="text-align:center" role="alert"><strong>Registracija je bila uspešna</strong></div>';
               //header("location: register_success.php");
             } catch (PDOException $e) {
               $message = "Napaka pri vnašanju: {$e->getMessage()}";
@@ -149,6 +153,18 @@
 						<label class="col-sm-5 control-label" for="email">Email</label>
 						<div class="col-sm-3">
 							<input class="form-control" id="email" name="email" placeholder="" type="email" value="">
+						</div>
+					</div>
+          <div class="form-group">
+						<label class="col-sm-5 control-label" for="address">Naslov</label>
+						<div class="col-sm-3">
+							<input class="form-control" id="address" name="address" placeholder="" type="text" value="">
+						</div>
+					</div>
+          <div class="form-group">
+						<label class="col-sm-5 control-label" for="phone">Telefon</label>
+						<div class="col-sm-3">
+							<input class="form-control" id="phone" name="phone" placeholder="" type="text" value="">
 						</div>
 					</div>
 					<div class="form-group">

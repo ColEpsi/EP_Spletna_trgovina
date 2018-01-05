@@ -126,7 +126,41 @@
              ?>
              <h3 style="color:black; margin-bottom: 0em; margin-top: 2em;"><strong>Cena:</strong></h3>
              <h2 style="color:red; margin-top: 0em;"><strong><?php echo $item["Cena"] ?>€</strong></h2>
-             <a href="#" class="btn btn-success btn-lg <?php echo $basket_button ?>" role="button" style="margin-bottom: 5em"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> V košarico</a>
+             <a href="#" class="btn btn-success btn-lg <?php echo $basket_button ?>" role="button" style="margin-bottom: 5em" data-toggle="modal" data-target="#login-popup"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> V košarico</a>
+             <div class="modal fade" id="login-popup" role="dialog">
+               <div class="modal-dialog">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title"><strong>Pred dodajanjem izdelkov v košarico se prijavite.</strong></h4>
+                   </div>
+                   <div class="modal-body">
+                     <div class="col-md-12">
+                       <form accept-charset="UTF-8" action="" class="form" id="login-nav" method="post" name="login-nav">
+                         <div style="color:red">
+                           <?php echo $error?>
+                         </div>
+                         <div class="form-group">
+                           <label class="sr-only" for="InputEmail">Email naslov</label> <input class="form-control" id="InputEmail" name="email" placeholder="Email naslov" required type="email">
+                         </div>
+                         <div class="form-group">
+                           <label class="sr-only" for="InputPassword">Geslo</label> <input class="form-control" id="exampleInputPassword2" name="password" placeholder="Geslo" required type="password">
+                           <div class="help-block text-right">
+                             <a href="password_reset.php">Pozabljeno geslo?</a>
+                           </div>
+                         </div>
+                         <div class="form-group">
+                           <button class="btn btn-primary btn-block" id="prijava" name="login" type="submit">Prijava</button>
+                         </div>
+                       </form>
+                     </div>
+                   </div>
+                   <div class="modal-footer">
+                   </div>
+                 </div>
+
+               </div>
+             </div>
           </div>
         </div>
         <div class="col-md-12">
