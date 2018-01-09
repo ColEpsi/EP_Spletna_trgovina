@@ -134,8 +134,8 @@
 		<div class="container-fluid" style="background-color: white">
 			<div>
 				<h2 style="text-align:center">Prosimo, vnesite vaše podatke:</h2>
-        <?php echo $message;
-				      ?><br>
+        <?php echo $message;?>
+        <br>
 				<form class="form-horizontal" method="post" role="form">
 					<div class="form-group">
 						<label class="col-sm-5 control-label" for="name">Ime</label>
