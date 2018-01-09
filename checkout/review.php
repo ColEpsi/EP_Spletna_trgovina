@@ -174,7 +174,7 @@
               $basket = '<div class="jumbotron">
                             <h1>Naročilo uspešno oddano!</h1>
                             <p>Zahvaljujemo se vam za oddano naročilo. Obdelali ga bomo v najkrajšem možnem času.</p>
-                            <p><a class="btn btn-primary btn-lg" href="#" role="button">Pregled naročil</a></p>
+                            <p><a class="btn btn-primary btn-lg" href="../orders.php" role="button">Pregled naročil</a></p>
                         </div>';
            	} catch (PDOException $e) {
            		echo "Napaka pri poizvedbi: {$e->getMessage()}";
@@ -243,10 +243,8 @@
 							<li>
 								<div class="row">
 									<div class="col-md-12">
-										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='#'" type="submit">Račun</button>
-										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='#'" type="submit">Naročila</button>
-										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='#'" type="submit">Naslovi</button>
-										<button class="btn btn-danger btn-block" name="submit" onclick="window.location.href='index.php'" type="submit">Odjava</button><br>
+										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='../orders.php'" type="submit">Naročila</button>
+										<button class="btn btn-danger btn-block" name="submit" onclick="window.location.href='../index.php'" type="submit">Odjava</button><br>
 									</div>
 								</div>
 							</li>

@@ -90,8 +90,7 @@
 							<li>
 								<div class="row">
 									<div class="col-md-12">
-                    <?php // TODO: Posodabljanje kosarice ?>
-										<p style="text-align:center"><strong>Vaša košarica je prazna.</strong></p>
+										<p style="text-align:center; color: red;"><strong>Pred dodajanjem izdelkov se prijavite!</strong></p>
 									</div>
 								</div>
 							</li>

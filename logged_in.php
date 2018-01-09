@@ -202,9 +202,7 @@ img:hover {
 							<li>
 								<div class="row">
 									<div class="col-md-12">
-										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='#'" type="submit">Račun</button>
-										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='#'" type="submit">Naročila</button>
-										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='#'" type="submit">Naslovi</button>
+										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='orders.php'" type="submit">Naročila</button>
 										<button class="btn btn-danger btn-block" name="submit" onclick="window.location.href='index.php'" type="submit">Odjava</button><br>
 									</div>
 								</div>
@@ -234,7 +232,6 @@ img:hover {
 				<?php
 					$statement = $pdo->prepare("SELECT * FROM izdelek");
 					$statement->execute();
-
 					foreach ($statement->fetchAll() as $row) {
 						$zaloga = ' <span style="color: green; font-size: 0.6em;"><strong>Na zalogi</strong></span>';
 						$zaloga_btn = "";
@@ -250,7 +247,7 @@ img:hover {
 					        <p>
 										<h3><strong>'. $row["Cena"] .'€</strong>'. $zaloga .'</h3>
 										<form action="" method="POST">
-											<button class="btn btn-success '. $zaloga_btn .'" name="item_submit" value="'. $row["ID"].'" type="submit"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> V košarico</button>
+											<button class="btn btn-success" name="item_submit" value="'. $row["ID"].'" type="submit"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> V košarico</button>
 										</form>
 									</p>
 					      </div>

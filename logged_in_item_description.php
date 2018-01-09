@@ -188,9 +188,7 @@
 							<li>
 								<div class="row">
 									<div class="col-md-12">
-										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='#'" type="submit">Račun</button>
-										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='#'" type="submit">Naročila</button>
-										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='#'" type="submit">Naslovi</button>
+										<button class="btn btn-info btn-block" name="submit" onclick="window.location.href='orders.php'" type="submit">Naročila</button>
 										<button class="btn btn-danger btn-block" name="submit" onclick="window.location.href='index.php'" type="submit">Odjava</button><br>
 									</div>
 								</div>
