@@ -6,24 +6,15 @@ $error = "";
 if(isset($_POST['submit'])) {
 	 $myemail = $_POST['email'];
 	 $mypassword = $_POST['password'];
-	 $statement = $pdo->prepare("SELECT * FROM prodajalec WHERE Email = ? and Geslo = ?");
+	 $statement = $pdo->prepare("SELECT * FROM administrator WHERE Email = ? and Geslo = ?");
 	 $statement->bindValue(1, $myemail);
 	 $statement->bindValue(2, $mypassword);
 	 $statement->execute();
 
 	 if ($statement->rowCount() == 1) {
 		$user = $statement->fetch();
-		if ($user["Status"] == "deactivated") {
-			$error = '<div class="alert alert-warning" role="alert">
-								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-								<span class="sr-only">Error:</span>
-								Vaš račun je deaktiviran. Obrnite se na administratorja strani.
-						 </div>';
-		}
-		else {
-			$_SESSION["user_ID"] = $user["ID"];
-			header("location: main.php");
-		}
+	 	$_SESSION["user_ID"] = $user["ID"];
+		header("location: main.php");
 	 }
 	 else {
 	 	$error = '<div class="alert alert-danger" role="alert">
@@ -39,39 +30,9 @@ if(isset($_POST['submit'])) {
 	<meta charset="UTF-8">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<link href="../mobilko_favicon.png" rel="shortcut icon" type="image/png">
-	<title>Mobilko | Mobilniki po ugodnih cenah!</title>
+	<title>Mobilko | Administrator</title>
 	<link href="../bootstrap/css/lumen.bootstrap.min.css" rel="stylesheet">
 	<link href="../css/main.css" rel="stylesheet">
-	<style media="screen">
-
-	{
-	 -moz-box-sizing: border-box;
-	 -webkit-box-sizing: border-box;
-	 box-sizing: border-box;
-	 margin: 0;
-	 padding: 0;
- }
-
-
-img {
-	 max-width: 100%;
-	 -moz-transition: all 0.3s;
-	 -webkit-transition: all 0.3s;
-	 transition: all 0.3s;
- }
-img:hover {
-	 -moz-transform: scale(1.1);
-	 -webkit-transform: scale(1.1);
-	 transform: scale(1.1);
-	 cursor: pointer;
- }
- #name:hover {
- 	cursor: pointer;
- }
- .thumbnail {
- 	overflow: hidden;
- }
-	</style>
 </head>
 <body>
 	<div class="container">
@@ -81,9 +42,7 @@ img:hover {
 			</div>
 		</nav>
 		<div class="container-fluid" style="background-color: white; height: 100%; overflow:auto;">
-			<h1 style="text-align: center">Vmesnik za prodajalce</h1>
-			<h4 style="text-align: center">Pred uporabo se prijavite z uporabniškim imenom in geslom pridobljenim od administratorja strani.</h4>
-			<hr>
+			<h1 style="text-align: center">Vmesnik za administratorja strani</h1>
       <?php echo $error; ?>
       <form class="form-horizontal" method="post" role="form">
         <div class="form-group">
